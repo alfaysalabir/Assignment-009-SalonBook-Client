@@ -70,3 +70,5 @@ Notes
 ## Deployment (Vercel)
 
 Add all the environment variables above in the Vercel project settings, deploy, then update `CLIENT_URL` on the server to the live client URL and add the live URL to the Google OAuth settings.
+
+## Live Site
