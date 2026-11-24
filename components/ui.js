@@ -7,7 +7,7 @@ export function SmartImage({ src, alt = "", className = "" }) {
   const [failed, setFailed] = useState(false);
   if (!src || failed) {
     return (
-      <div className={`grid place-items-center bg-gradient-to-br from-blush-200 to-blush-100 text-gold-600 ${className}`}>
+      <div className={`grid place-items-center bg-gradient-to-br from-paper-200 to-paper-100 text-clay-600 ${className}`}>
         <FiScissors size={28} />
       </div>
     );
@@ -29,7 +29,7 @@ export function Spinner({ className = "h-5 w-5" }) {
 export function PageLoader({ text = "Loading…" }) {
   return (
     <div className="grid min-h-[50vh] place-items-center">
-      <div className="flex flex-col items-center gap-3 text-plum-700">
+      <div className="flex flex-col items-center gap-3 text-sage-700">
         <Spinner className="h-9 w-9" />
         <p className="text-sm font-medium text-muted">{text}</p>
       </div>
@@ -41,7 +41,7 @@ export function ErrorBox({ message, onRetry }) {
   return (
     <div className="card mx-auto flex max-w-lg flex-col items-center gap-3 p-8 text-center">
       <FiAlertCircle size={34} className="text-rose-500" />
-      <p className="font-semibold text-plum-900">{message || "Something went wrong"}</p>
+      <p className="font-semibold text-sage-900">{message || "Something went wrong"}</p>
       {onRetry && (
         <button onClick={onRetry} className="btn-dark btn-sm">
           Try Again
@@ -54,8 +54,8 @@ export function ErrorBox({ message, onRetry }) {
 export function EmptyState({ title, text, action }) {
   return (
     <div className="card flex flex-col items-center gap-2 p-10 text-center">
-      <FiInbox size={34} className="text-gold-500" />
-      <h3 className="font-display text-2xl font-bold text-plum-900">{title}</h3>
+      <FiInbox size={34} className="text-clay-500" />
+      <h3 className="font-display text-2xl font-bold text-sage-900">{title}</h3>
       {text && <p className="max-w-sm text-sm text-muted">{text}</p>}
       {action && <div className="mt-3">{action}</div>}
     </div>
@@ -77,18 +77,18 @@ const badgeStyles = {
 export function StatusBadge({ status }) {
   return (
     <span
-      className={`inline-block rounded-full px-3 py-1 text-xs font-bold capitalize ${badgeStyles[status] || "bg-slate-100 text-slate-600"}`}
+      className={`inline-block rounded-sm px-3 py-1 text-xs font-bold capitalize ${badgeStyles[status] || "bg-slate-100 text-slate-600"}`}
     >
       {status}
     </span>
   );
 }
 
-export function SectionHeading({ eyebrow, title, text, center = true }) {
+export function SectionHeading({ eyebrow, title, text, center = false }) {
   return (
     <div className={center ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <span className={`eyebrow ${center ? "" : "eyebrow-left"}`}>{eyebrow}</span>
-      <h2 className="mt-3 text-4xl font-bold text-plum-900 sm:text-5xl">{title}</h2>
+      <span className="eyebrow">{eyebrow}</span>
+      <h2 className="mt-3 text-4xl text-sage-900 sm:text-5xl">{title}</h2>
       {text && <p className="mt-3 text-muted">{text}</p>}
     </div>
   );
@@ -109,13 +109,13 @@ export function Modal({ open, onClose, title, children, wide = false }) {
   if (!open) return null;
   return (
     <div className="fixed inset-0 z-50 grid place-items-center p-4" role="dialog" aria-modal="true" aria-label={title}>
-      <div className="absolute inset-0 bg-plum-950/60" onClick={onClose} />
+      <div className="absolute inset-0 bg-sage-950/60" onClick={onClose} />
       <div
-        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-3xl bg-white p-6 shadow-2xl ${wide ? "max-w-2xl" : "max-w-md"}`}
+        className={`relative max-h-[90vh] w-full overflow-y-auto rounded-sm bg-white p-6 shadow-2xl ${wide ? "max-w-2xl" : "max-w-md"}`}
       >
         <div className="mb-4 flex items-start justify-between gap-4">
-          <h3 className="font-display text-3xl font-bold text-plum-900">{title}</h3>
-          <button onClick={onClose} aria-label="Close" className="cursor-pointer rounded-full p-1.5 hover:bg-blush-100">
+          <h3 className="font-display text-3xl font-bold text-sage-900">{title}</h3>
+          <button onClick={onClose} aria-label="Close" className="cursor-pointer rounded-sm p-1.5 hover:bg-paper-100">
             <FiX size={20} />
           </button>
         </div>

@@ -53,7 +53,7 @@ export default function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-white/90 backdrop-blur">
+    <header className="sticky top-0 z-40 border-b border-sage-900 bg-paper-50/95 backdrop-blur">
       <div className="container-page flex h-[72px] items-center justify-between">
         <Logo />
 
@@ -63,8 +63,8 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`text-sm font-semibold transition hover:text-gold-600 ${
-                isActive(link.href) ? "text-gold-600" : "text-plum-900"
+              className={`text-xs font-bold uppercase tracking-[0.18em] transition hover:text-clay-600 ${
+                isActive(link.href) ? "text-clay-600" : "text-sage-900"
               }`}
             >
               {link.label}
@@ -75,24 +75,24 @@ export default function Navbar() {
         <div className="flex items-center gap-3">
           {/* Auth area */}
           {isPending ? (
-            <div className="h-10 w-28 animate-pulse rounded-full bg-blush-100" />
+            <div className="h-10 w-28 animate-pulse rounded-sm bg-paper-100" />
           ) : user ? (
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setDropdownOpen((o) => !o)}
-                className="flex cursor-pointer items-center gap-2 rounded-full border border-line bg-white py-1.5 pl-1.5 pr-3 transition hover:border-plum-700"
+                className="flex cursor-pointer items-center gap-2 rounded-sm border border-line bg-white py-1.5 pl-1.5 pr-3 transition hover:border-sage-700"
                 aria-haspopup="menu"
                 aria-expanded={dropdownOpen}
               >
                 {user.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
-                  <img src={user.image} alt="" className="h-8 w-8 rounded-full object-cover" />
+                  <img src={user.image} alt="" className="h-8 w-8 rounded-sm object-cover" />
                 ) : (
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-plum-900 text-sm font-bold text-white">
+                  <span className="grid h-8 w-8 place-items-center rounded-sm bg-sage-900 text-sm font-bold text-white">
                     {user.name?.[0]?.toUpperCase()}
                   </span>
                 )}
-                <span className="hidden max-w-[110px] truncate text-sm font-semibold text-plum-900 sm:block">
+                <span className="hidden max-w-[110px] truncate text-sm font-semibold text-sage-900 sm:block">
                   {user.name}
                 </span>
                 <FiChevronDown size={15} className="text-muted" />
@@ -101,21 +101,21 @@ export default function Navbar() {
               {dropdownOpen && (
                 <div
                   role="menu"
-                  className="absolute right-0 mt-2 w-56 overflow-hidden rounded-2xl border border-line bg-white shadow-xl"
+                  className="absolute right-0 mt-2 w-56 overflow-hidden rounded-sm border border-line bg-white shadow-xl"
                 >
                   <div className="border-b border-line px-4 py-3">
-                    <p className="truncate text-sm font-bold text-plum-900">{user.name}</p>
+                    <p className="truncate text-sm font-bold text-sage-900">{user.name}</p>
                     <p className="truncate text-xs text-muted">{user.email}</p>
                   </div>
                   <Link
                     href="/dashboard"
-                    className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:bg-blush-100"
+                    className="flex items-center gap-2 px-4 py-3 text-sm font-medium hover:bg-paper-100"
                   >
                     <FiGrid size={15} /> Dashboard
                   </Link>
                   <button
                     onClick={handleLogout}
-                    className="flex w-full cursor-pointer items-center gap-2 px-4 py-3 text-left text-sm font-medium text-rose-600 hover:bg-blush-100"
+                    className="flex w-full cursor-pointer items-center gap-2 px-4 py-3 text-left text-sm font-medium text-rose-600 hover:bg-paper-100"
                   >
                     <FiLogOut size={15} /> Logout
                   </button>
@@ -135,7 +135,7 @@ export default function Navbar() {
 
           {/* Mobile menu button */}
           <button
-            className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-line md:hidden"
+            className="grid h-10 w-10 cursor-pointer place-items-center rounded-sm border border-line md:hidden"
             onClick={() => setMenuOpen((o) => !o)}
             aria-label="Toggle menu"
           >
@@ -152,8 +152,8 @@ export default function Navbar() {
               <Link
                 key={link.href}
                 href={link.href}
-                className={`rounded-xl px-4 py-3 text-sm font-semibold ${
-                  isActive(link.href) ? "bg-blush-100 text-gold-600" : "text-plum-900"
+                className={`rounded-sm px-4 py-3 text-sm font-semibold ${
+                  isActive(link.href) ? "bg-paper-100 text-clay-600" : "text-sage-900"
                 }`}
               >
                 {link.label}

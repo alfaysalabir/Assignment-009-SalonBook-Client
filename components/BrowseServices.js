@@ -42,11 +42,11 @@ export default function BrowseServices() {
 
   return (
     <>
-      <section className="bg-plum-900 py-14 text-center text-white">
+      <section className="border-b border-sage-900 bg-paper-100 py-14">
         <div className="container-page">
           <span className="eyebrow">Our Menu</span>
-          <h1 className="mt-3 text-5xl font-bold sm:text-6xl">Browse <span className="italic text-gold-400">Services</span></h1>
-          <p className="mx-auto mt-3 max-w-xl text-white/70">Search, filter and sort to find the treatment that is right for you.</p>
+          <h1 className="mt-3 text-5xl text-sage-900 sm:text-7xl">Browse <em className="text-clay-500">services</em></h1>
+          <p className="mt-3 max-w-xl text-muted">Search, filter and sort to find the treatment that is right for you.</p>
         </div>
       </section>
 
@@ -63,7 +63,7 @@ export default function BrowseServices() {
               className="input pl-11 pr-10"
             />
             {search && (
-              <button onClick={() => setSearch("")} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-full p-1 text-muted hover:bg-blush-100">
+              <button onClick={() => setSearch("")} aria-label="Clear search" className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer rounded-sm p-1 text-muted hover:bg-paper-100">
                 <FiX />
               </button>
             )}
@@ -85,8 +85,8 @@ export default function BrowseServices() {
             <button
               key={c || "all"}
               onClick={() => updateUrl({ category: c })}
-              className={`cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold transition ${
-                category === c ? "border-plum-900 bg-plum-900 text-white" : "border-line bg-white text-plum-800 hover:border-plum-700"
+              className={`cursor-pointer rounded-sm border px-4 py-1.5 text-xs font-bold transition ${
+                category === c ? "border-sage-900 bg-sage-900 text-white" : "border-line bg-white text-sage-800 hover:border-sage-700"
               }`}
             >
               {c || "All"}
@@ -98,7 +98,7 @@ export default function BrowseServices() {
           {error ? (
             <ErrorBox message={error} onRetry={reload} />
           ) : loading ? (
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 6 }).map((_, i) => <ServiceCardSkeleton key={i} />)}
             </div>
           ) : services.length === 0 ? (
@@ -110,7 +110,7 @@ export default function BrowseServices() {
           ) : (
             <>
               <p className="mb-4 text-sm text-muted">{services.length} service{services.length === 1 ? "" : "s"} found</p>
-              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
                 {services.map((s) => <ServiceCard key={s._id} service={s} />)}
               </div>
             </>

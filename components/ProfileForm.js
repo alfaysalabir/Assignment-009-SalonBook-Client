@@ -52,11 +52,11 @@ export default function ProfileForm() {
         </div>
         <div>
           <label htmlFor="email" className="label">Email</label>
-          <input id="email" className="input bg-blush-100" value={user.email} disabled />
+          <input id="email" className="input bg-paper-100" value={user.email} disabled />
         </div>
         <div>
           <label htmlFor="role" className="label">Role</label>
-          <input id="role" className="input bg-blush-100 capitalize" value={user.role || "customer"} disabled />
+          <input id="role" className="input bg-paper-100 capitalize" value={user.role || "customer"} disabled />
         </div>
       </div>
       <button type="submit" disabled={saving || uploading} className="btn-dark">

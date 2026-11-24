@@ -2,13 +2,13 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { FiSearch, FiArrowRight, FiStar, FiScissors, FiCalendar, FiCheckCircle, FiCreditCard, FiPlus, FiMinus } from "react-icons/fi";
+import { FiSearch, FiArrowRight, FiPlus, FiMinus, FiCheckCircle } from "react-icons/fi";
 import { useApi } from "@/lib/useApi";
-import { CATEGORIES, HERO_IMAGE, HERO_ARCH_IMAGE, ABOUT_IMAGE } from "@/lib/constants";
+import { CATEGORIES, HERO_IMAGE, ABOUT_IMAGE } from "@/lib/constants";
 import ServiceCard, { ServiceCardSkeleton } from "@/components/ServiceCard";
 import { SectionHeading, SmartImage, ErrorBox, EmptyState } from "@/components/ui";
 
-/* ---------- 1. Banner ---------- */
+/* ---------- 1. Banner: split layout, photo fills the right half ---------- */
 export function Hero() {
   const router = useRouter();
   const [search, setSearch] = useState("");
@@ -23,86 +23,111 @@ export function Hero() {
   }
 
   return (
-    <section
-      className="relative overflow-hidden bg-plum-900 bg-cover bg-center text-white"
-      style={{ backgroundImage: `url(${HERO_IMAGE})` }}
-    >
-      <div className="absolute inset-0 bg-gradient-to-r from-plum-950 via-plum-900/95 to-plum-800/70" />
-      <div className="container-page relative grid items-center gap-12 py-16 lg:grid-cols-[1.1fr_0.9fr] lg:py-24">
-        <div className="fade-up">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-gold-300">
-            <FiStar size={13} /> Top-rated salon experience
-          </span>
-          <h1 className="mt-6 text-5xl font-bold leading-[1.05] sm:text-6xl lg:text-7xl">
-            Beauty, booked <span className="italic text-gold-400">beautifully.</span>
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/75">
-            Discover signature hair, skin and spa services, choose the time that suits you and pay securely online. Self-care has never been this simple.
-          </p>
+    <>
+      <section className="relative overflow-hidden border-b border-sage-900 bg-paper-50">
+        {/* salon background image (right half on desktop) */}
+        <div
+          role="img"
+          aria-label="Inside a calm, modern hair salon"
+          className="absolute inset-y-0 right-0 hidden w-[46%] bg-sage-800 bg-cover bg-center lg:block"
+          style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+        />
+        <div className="absolute inset-y-0 right-0 hidden w-[46%] bg-sage-950/20 lg:block" />
 
-          <form onSubmit={handleSearch} className="mt-8 flex max-w-xl flex-col gap-2 rounded-3xl bg-white p-2 sm:flex-row sm:items-center sm:rounded-full">
-            <div className="flex flex-1 items-center gap-2 px-4">
-              <FiSearch className="shrink-0 text-muted" />
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search a service…"
-                aria-label="Search services"
-                className="w-full bg-transparent py-3 text-sm text-ink outline-none placeholder:text-muted"
-              />
-            </div>
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              aria-label="Category"
-              className="rounded-full bg-blush-100 px-4 py-3 text-sm text-plum-900 outline-none sm:max-w-[180px]"
-            >
-              <option value="">All Categories</option>
-              {CATEGORIES.map((c) => (
-                <option key={c}>{c}</option>
-              ))}
-            </select>
-            <button type="submit" className="btn-dark" aria-label="Search">
-              <FiArrowRight />
-            </button>
-          </form>
+        <div className="container-page relative grid min-h-[640px] items-center gap-10 py-14 lg:grid-cols-[1.15fr_0.85fr] lg:py-20">
+          <div className="fade-up max-w-2xl lg:pr-10">
+            <span className="eyebrow">Hair · Skin · Spa · Dhaka</span>
+            <h1 className="mt-6 text-5xl leading-[1.02] text-sage-900 sm:text-6xl lg:text-[5.4rem]">
+              Considered care, <em className="text-clay-500">booked</em> in minutes.
+            </h1>
+            <p className="mt-6 max-w-lg text-lg leading-relaxed text-muted">
+              Discover signature hair, skin and spa services, choose the time that suits you and pay securely online.
+            </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <Link href="/services" className="btn-gold">
-              Explore Salon Services <FiArrowRight />
-            </Link>
-            <div className="flex items-center gap-3 text-sm text-white/80">
-              <div className="flex -space-x-2">
-                {["A", "M", "S", "R"].map((l, i) => (
-                  <span key={l} className={`grid h-9 w-9 place-items-center rounded-full border-2 border-plum-900 text-xs font-bold text-plum-950 ${["bg-gold-400", "bg-blush-200", "bg-gold-300", "bg-blush-300"][i]}`}>
-                    {l}
-                  </span>
-                ))}
+            <form onSubmit={handleSearch} className="mt-9 flex max-w-xl flex-col border border-sage-900 bg-white sm:flex-row">
+              <div className="flex flex-1 items-center gap-2 px-4">
+                <FiSearch className="shrink-0 text-muted" />
+                <input
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  placeholder="Search a service…"
+                  aria-label="Search services"
+                  className="w-full bg-transparent py-4 text-sm text-ink outline-none placeholder:text-muted"
+                />
               </div>
-              Loved by 2K+ clients
+              <select
+                value={category}
+                onChange={(e) => setCategory(e.target.value)}
+                aria-label="Category"
+                className="border-t border-line bg-paper-100 px-4 py-4 text-sm text-sage-900 outline-none sm:max-w-[170px] sm:border-l sm:border-t-0"
+              >
+                <option value="">All Categories</option>
+                {CATEGORIES.map((c) => (
+                  <option key={c}>{c}</option>
+                ))}
+              </select>
+              <button type="submit" className="btn-dark !rounded-none" aria-label="Search">
+                <FiArrowRight size={16} />
+              </button>
+            </form>
+
+            <div className="mt-7 flex flex-wrap items-center gap-4">
+              <Link href="/services" className="btn-gold">
+                Explore Salon Services <FiArrowRight size={14} />
+              </Link>
+              <Link href="/signup" className="btn-outline">Create Account</Link>
+            </div>
+
+            <dl className="mt-12 grid max-w-md grid-cols-3 border-t border-sage-900 pt-5">
+              {[
+                ["12+", "Expert stylists"],
+                ["4.9", "Average rating"],
+                ["2K+", "Happy clients"],
+              ].map(([n, l], i) => (
+                <div key={l} className={i ? "border-l border-line pl-4" : ""}>
+                  <dt className="font-display text-4xl text-sage-900">{n}</dt>
+                  <dd className="mt-1 text-xs uppercase tracking-wider text-muted">{l}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
+
+          {/* mobile image */}
+          <div
+            role="img"
+            aria-label="Inside a calm, modern hair salon"
+            className="h-72 bg-sage-800 bg-cover bg-center sm:h-96 lg:hidden"
+            style={{ backgroundImage: `url(${HERO_IMAGE})` }}
+          />
+
+          {/* floating note over the photo (desktop) */}
+          <div className="hidden self-end lg:block">
+            <div className="-ml-20 mb-4 max-w-[270px] border border-sage-900 bg-paper-50 p-5 shadow-[8px_8px_0_0_var(--color-sage-900)]">
+              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.18em] text-clay-600">
+                <FiCheckCircle /> Online booking
+              </p>
+              <p className="mt-2 font-display text-2xl leading-snug text-sage-900">Request a slot, pay once it&apos;s confirmed.</p>
             </div>
           </div>
         </div>
+      </section>
 
-        {/* Arch image */}
-        <div className="relative mx-auto hidden w-full max-w-md lg:block">
-          <div className="overflow-hidden rounded-t-[200px] rounded-b-3xl border-8 border-white/10">
-            <SmartImage src={HERO_ARCH_IMAGE} alt="Stylist working on a client" className="h-[480px] w-full" />
-          </div>
-          <div className="absolute -left-10 bottom-16 flex items-center gap-3 rounded-2xl bg-white p-4 text-plum-900 shadow-xl">
-            <span className="grid h-11 w-11 place-items-center rounded-full bg-gold-400"><FiStar /></span>
-            <div>
-              <p className="font-display text-2xl font-bold leading-none">4.9 / 5</p>
-              <p className="text-xs text-muted">Average rating</p>
+      {/* sliding strip of categories */}
+      <div className="overflow-hidden bg-sage-900 py-4" aria-hidden="true">
+        <div className="ticker font-display text-2xl text-paper-200">
+          {[0, 1].map((k) => (
+            <div key={k} className="flex shrink-0">
+              {CATEGORIES.map((c) => (
+                <span key={c + k} className="flex items-center whitespace-nowrap">
+                  <span className="px-6">{c}</span>
+                  <span className="text-clay-400">✦</span>
+                </span>
+              ))}
             </div>
-          </div>
-          <div className="absolute -right-4 top-12 rounded-2xl bg-plum-950/90 px-4 py-3 text-center shadow-xl">
-            <p className="font-display text-3xl font-bold text-gold-400">12+</p>
-            <p className="text-xs text-white/70">Expert stylists</p>
-          </div>
+          ))}
         </div>
       </div>
-    </section>
+    </>
   );
 }
 
@@ -112,60 +137,64 @@ export function FeaturedServices() {
   const services = data?.services || [];
 
   return (
-    <section className="container-page py-20">
-      <SectionHeading eyebrow="Featured Services" title="Treatments our clients adore" text="A hand-picked selection of our most loved services." />
+    <section className="container-page py-24">
+      <div className="flex flex-wrap items-end justify-between gap-6 border-b border-sage-900 pb-8">
+        <SectionHeading eyebrow="Featured Services" title="Treatments our clients return for" />
+        <Link href="/services" className="btn-outline">All services <FiArrowRight size={14} /></Link>
+      </div>
       <div className="mt-12">
         {error ? (
           <ErrorBox message={error} onRetry={reload} />
         ) : loading ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {Array.from({ length: 6 }).map((_, i) => <ServiceCardSkeleton key={i} />)}
           </div>
         ) : services.length === 0 ? (
           <EmptyState title="No services yet" text="Our menu is being prepared. Please check back soon." />
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((s) => <ServiceCard key={s._id} service={s} />)}
           </div>
         )}
-      </div>
-      <div className="mt-10 text-center">
-        <Link href="/services" className="btn-outline">See All Services <FiArrowRight /></Link>
       </div>
     </section>
   );
 }
 
-/* ---------- 3. Categories (dynamic) ---------- */
+/* ---------- 3. Categories as a numbered index (dynamic) ---------- */
 export function Categories() {
   const { data, loading, error } = useApi("/api/services/categories", { auth: false });
   const list = data || CATEGORIES.map((name) => ({ name, count: 0 }));
 
   return (
-    <section className="bg-white py-20">
-      <div className="container-page">
-        <SectionHeading eyebrow="Service Categories" title="Find your perfect treatment" text="Pick a category and explore every service inside it." />
-        {error && <p className="mt-6 text-center text-sm text-rose-600">{error}</p>}
-        <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {list.map((c, i) => (
-            <Link
-              key={c.name}
-              href={`/services?category=${encodeURIComponent(c.name)}`}
-              className={`group relative flex min-h-[150px] flex-col justify-between overflow-hidden rounded-3xl border border-line p-6 transition hover:-translate-y-1 hover:shadow-lg ${
-                i % 4 === 0 ? "bg-blush-100" : i % 4 === 1 ? "bg-plum-900 text-white" : i % 4 === 2 ? "bg-blush-200" : "bg-gold-300/40"
-              }`}
-            >
-              <FiScissors size={22} className={i % 4 === 1 ? "text-gold-400" : "text-gold-600"} />
-              <div>
-                <h3 className="text-2xl font-bold leading-tight">{c.name}</h3>
-                <p className={`mt-1 flex items-center gap-1 text-xs font-semibold ${i % 4 === 1 ? "text-white/70" : "text-muted"}`}>
-                  {loading ? "…" : `${c.count} service${c.count === 1 ? "" : "s"}`}
-                  <FiArrowRight className="transition group-hover:translate-x-1" />
-                </p>
-              </div>
-            </Link>
-          ))}
+    <section className="border-y border-sage-900 bg-paper-100 py-24">
+      <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.6fr]">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <SectionHeading
+            eyebrow="Service Categories"
+            title="Find your treatment"
+            text="Pick a category and explore every service inside it."
+          />
+          {error && <p className="mt-4 text-sm text-rose-700">{error}</p>}
         </div>
+
+        <ul className="border-t border-sage-900">
+          {list.map((c, i) => (
+            <li key={c.name}>
+              <Link
+                href={`/services?category=${encodeURIComponent(c.name)}`}
+                className="group grid grid-cols-[3rem_1fr_auto] items-center gap-4 border-b border-line px-2 py-5 transition-all hover:bg-sage-900 hover:px-6 sm:grid-cols-[4.5rem_1fr_auto_2.5rem]"
+              >
+                <span className="font-display text-xl text-clay-500 group-hover:text-clay-300">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-display text-2xl text-sage-900 group-hover:text-paper-50 sm:text-4xl">{c.name}</span>
+                <span className="text-xs font-semibold uppercase tracking-wider text-muted group-hover:text-paper-200">
+                  {loading ? "…" : `${c.count} service${c.count === 1 ? "" : "s"}`}
+                </span>
+                <FiArrowRight className="hidden justify-self-end text-sage-900 transition group-hover:translate-x-1 group-hover:text-clay-300 sm:block" />
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -174,37 +203,32 @@ export function Categories() {
 /* ---------- 4. Extra section: How it works ---------- */
 export function HowItWorks() {
   const steps = [
-    { icon: FiSearch, title: "Choose a service", text: "Browse our menu, search by name and filter by category." },
-    { icon: FiCalendar, title: "Request a time", text: "Pick your date and a time slot that fits your day." },
-    { icon: FiCheckCircle, title: "Get confirmation", text: "Our team reviews and confirms your appointment." },
-    { icon: FiCreditCard, title: "Pay securely", text: "Pay online with Stripe from your dashboard." },
+    { title: "Choose a service", text: "Browse our menu, search by name and filter by category." },
+    { title: "Request a time", text: "Pick your date and a time slot that fits your day." },
+    { title: "Get confirmation", text: "Our team reviews and confirms your appointment." },
+    { title: "Pay securely", text: "Pay online with Stripe from your dashboard." },
   ];
   return (
-    <section className="container-page grid items-center gap-12 py-20 lg:grid-cols-2">
-      <div className="relative">
-        <div className="overflow-hidden rounded-[2rem]">
-          <SmartImage src={ABOUT_IMAGE} alt="Relaxing spa treatment" className="h-[420px] w-full lg:h-[520px]" />
-        </div>
-        <div className="absolute -bottom-5 right-4 rounded-2xl bg-plum-900 px-6 py-4 text-white shadow-xl sm:-right-5">
-          <p className="font-display text-4xl font-bold text-gold-400">5 min</p>
-          <p className="text-xs text-white/70">to book your visit</p>
-        </div>
+    <section className="container-page py-24">
+      <div className="grid gap-8 lg:grid-cols-2 lg:items-end">
+        <SectionHeading eyebrow="How It Works" title="Four easy steps to your next visit" />
+        <p className="max-w-md text-muted lg:justify-self-end">
+          No phone calls, no waiting. Send a request in a few clicks and we will take care of the rest.
+        </p>
       </div>
-      <div>
-        <span className="eyebrow eyebrow-left">How It Works</span>
-        <h2 className="mt-3 text-4xl font-bold text-plum-900 sm:text-5xl">Four easy steps to your next visit</h2>
-        <div className="mt-8 grid gap-4 sm:grid-cols-2">
-          {steps.map(({ icon: Icon, title, text }, i) => (
-            <div key={title} className="card p-5">
-              <div className="flex items-center justify-between">
-                <span className="grid h-11 w-11 place-items-center rounded-full bg-plum-900 text-gold-300"><Icon size={18} /></span>
-                <span className="font-display text-4xl font-bold text-blush-300">0{i + 1}</span>
-              </div>
-              <h3 className="mt-4 text-2xl font-bold text-plum-900">{title}</h3>
-              <p className="mt-1 text-sm text-muted">{text}</p>
-            </div>
-          ))}
-        </div>
+
+      <ol className="mt-14 grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-4">
+        {steps.map((s, i) => (
+          <li key={s.title} className="border-t-2 border-sage-900 pt-5">
+            <span className="font-display text-6xl text-clay-500">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className="mt-4 text-2xl text-sage-900">{s.title}</h3>
+            <p className="mt-2 text-sm leading-relaxed text-muted">{s.text}</p>
+          </li>
+        ))}
+      </ol>
+
+      <div className="mt-16 overflow-hidden">
+        <SmartImage src={ABOUT_IMAGE} alt="Relaxing spa treatment" className="h-64 w-full sm:h-96" />
       </div>
     </section>
   );
@@ -221,23 +245,26 @@ const faqs = [
 export function FAQ() {
   const [open, setOpen] = useState(0);
   return (
-    <section className="bg-blush-100 py-20">
-      <div className="container-page">
-        <SectionHeading eyebrow="Your Questions Answered" title="Frequently asked questions" />
-        <div className="mx-auto mt-10 max-w-3xl space-y-3">
+    <section className="border-t border-sage-900 bg-sage-900 py-24 text-paper-50">
+      <div className="container-page grid gap-12 lg:grid-cols-[0.8fr_1.4fr]">
+        <div>
+          <span className="eyebrow !text-clay-300">Your Questions Answered</span>
+          <h2 className="mt-3 text-4xl text-paper-50 sm:text-5xl">Frequently asked questions</h2>
+        </div>
+        <div className="border-t border-white/20">
           {faqs.map((f, i) => (
-            <div key={f.q} className="card overflow-hidden">
+            <div key={f.q} className="border-b border-white/20">
               <button
                 onClick={() => setOpen(open === i ? -1 : i)}
                 aria-expanded={open === i}
-                className="flex w-full cursor-pointer items-center justify-between gap-4 p-5 text-left font-semibold text-plum-900"
+                className="flex w-full cursor-pointer items-center justify-between gap-4 py-6 text-left font-display text-2xl"
               >
                 {f.q}
-                <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-plum-900 text-white">
+                <span className="grid h-8 w-8 shrink-0 place-items-center border border-white/40">
                   {open === i ? <FiMinus size={14} /> : <FiPlus size={14} />}
                 </span>
               </button>
-              {open === i && <p className="px-5 pb-5 text-sm leading-relaxed text-muted">{f.a}</p>}
+              {open === i && <p className="max-w-xl pb-6 text-sm leading-relaxed text-paper-200">{f.a}</p>}
             </div>
           ))}
         </div>
@@ -249,13 +276,17 @@ export function FAQ() {
 /* ---------- Final call to action ---------- */
 export function CTA() {
   return (
-    <section className="container-page py-20">
-      <div className="relative overflow-hidden rounded-[2rem] bg-plum-900 px-6 py-14 text-center text-white sm:px-12">
-        <div className="absolute -right-16 -top-16 h-56 w-56 rounded-full bg-gold-400/20" />
-        <div className="absolute -bottom-20 -left-10 h-56 w-56 rounded-full bg-plum-700/50" />
-        <h2 className="relative text-4xl font-bold sm:text-5xl">Ready for a little <span className="italic text-gold-400">me time?</span></h2>
-        <p className="relative mx-auto mt-3 max-w-lg text-white/70">Join SalonBook today and book your first appointment in minutes.</p>
-        <Link href="/signup" className="btn-gold relative mt-7">Create Free Account <FiArrowRight /></Link>
+    <section className="container-page py-24">
+      <div className="grid items-center gap-8 border border-sage-900 bg-clay-500 p-8 text-white shadow-[10px_10px_0_0_var(--color-sage-900)] sm:p-14 lg:grid-cols-[1.4fr_1fr]">
+        <h2 className="text-4xl leading-tight text-white sm:text-6xl">
+          Ready for a little <em>me time?</em>
+        </h2>
+        <div className="lg:justify-self-end">
+          <p className="max-w-sm text-white/90">Join SalonBook today and book your first appointment in minutes.</p>
+          <Link href="/signup" className="mt-6 inline-flex items-center gap-2 bg-sage-900 px-7 py-4 text-xs font-bold uppercase tracking-[0.14em] text-paper-50 transition hover:bg-white hover:text-sage-900">
+            Create Free Account <FiArrowRight size={14} />
+          </Link>
+        </div>
       </div>
     </section>
   );

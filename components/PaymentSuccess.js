@@ -58,7 +58,7 @@ export default function PaymentSuccess() {
     />
   ) : (
     <Result
-      icon={tries < 8 ? <Spinner className="h-10 w-10 text-plum-700" /> : <FiClock size={42} className="text-amber-500" />}
+      icon={tries < 8 ? <Spinner className="h-10 w-10 text-sage-700" /> : <FiClock size={42} className="text-amber-500" />}
       title={tries < 8 ? "Confirming your payment…" : "Payment is being processed"}
       text={
         tries < 8
@@ -74,7 +74,7 @@ function Result({ icon, title, text }) {
     <section className="container-page grid min-h-[60vh] place-items-center py-10">
       <div className="card max-w-lg p-10 text-center">
         <div className="mb-4 grid place-items-center">{icon}</div>
-        <h1 className="text-4xl font-bold text-plum-900">{title}</h1>
+        <h1 className="text-4xl font-bold text-sage-900">{title}</h1>
         <p className="mt-3 text-muted">{text}</p>
         <Link href="/dashboard/customer/appointments" className="btn-dark mt-7">View My Appointments</Link>
       </div>

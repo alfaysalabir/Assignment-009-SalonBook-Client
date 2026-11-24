@@ -31,10 +31,10 @@ export default function ImageInput({ value, onChange, allowUrl = false, onBusyCh
   return (
     <div>
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center">
-        <div className={`relative h-24 w-24 shrink-0 overflow-hidden border border-line bg-blush-100 ${round ? "rounded-full" : "rounded-2xl"}`}>
+        <div className={`relative h-24 w-24 shrink-0 overflow-hidden border border-line bg-paper-100 ${round ? "rounded-sm" : "rounded-sm"}`}>
           <SmartImage src={value} alt="Preview" className="h-full w-full" />
           {uploading && (
-            <div className="absolute inset-0 grid place-items-center bg-white/70 text-plum-700">
+            <div className="absolute inset-0 grid place-items-center bg-white/70 text-sage-700">
               <Spinner />
             </div>
           )}
@@ -42,14 +42,14 @@ export default function ImageInput({ value, onChange, allowUrl = false, onBusyCh
 
         <div className="flex-1">
           {allowUrl && (
-            <div className="mb-2 inline-flex rounded-full bg-blush-100 p-1 text-xs font-bold">
+            <div className="mb-2 inline-flex rounded-sm bg-paper-100 p-1 text-xs font-bold">
               {["upload", "url"].map((m) => (
                 <button
                   type="button"
                   key={m}
                   onClick={() => setMode(m)}
-                  className={`cursor-pointer rounded-full px-4 py-1.5 capitalize transition ${
-                    mode === m ? "bg-plum-900 text-white" : "text-plum-800"
+                  className={`cursor-pointer rounded-sm px-4 py-1.5 capitalize transition ${
+                    mode === m ? "bg-sage-900 text-white" : "text-sage-800"
                   }`}
                 >
                   {m === "url" ? "Image URL" : "Upload"}
