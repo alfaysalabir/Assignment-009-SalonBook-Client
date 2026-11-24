@@ -73,7 +73,7 @@ export default function ManageServicesPage() {
         <EmptyState title="No services found" text="Add your first service to get started." action={<Link href="/dashboard/admin/services/add" className="btn-dark btn-sm">Add Service</Link>} />
       ) : (
         <TableWrap>
-          <thead className="bg-blush-100">
+          <thead className="bg-paper-100">
             <tr>{["Service", "Category", "Price", "Duration", "Status", "Actions"].map((h) => <th key={h} className="th">{h}</th>)}</tr>
           </thead>
           <tbody>
@@ -81,8 +81,8 @@ export default function ManageServicesPage() {
               <tr key={s._id} className="border-t border-line">
                 <td className="td">
                   <div className="flex items-center gap-3">
-                    <SmartImage src={s.image} alt="" className="h-12 w-12 shrink-0 rounded-xl" />
-                    <span className="font-bold text-plum-900">{s.serviceName}</span>
+                    <SmartImage src={s.image} alt="" className="h-12 w-12 shrink-0 rounded-sm" />
+                    <span className="font-bold text-sage-900">{s.serviceName}</span>
                   </div>
                 </td>
                 <td className="td text-muted">{s.category}</td>

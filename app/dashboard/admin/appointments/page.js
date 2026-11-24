@@ -41,7 +41,7 @@ export default function ManageAppointmentsPage() {
       <PageTitle title="Manage Appointments" text="Review requests, confirm or cancel them." />
       <div className="mb-4 flex flex-wrap gap-2">
         {["all", "pending", "confirmed", "cancelled"].map((f) => (
-          <button key={f} onClick={() => setFilter(f)} className={`cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold capitalize ${filter === f ? "border-plum-900 bg-plum-900 text-white" : "border-line bg-white text-plum-800"}`}>
+          <button key={f} onClick={() => setFilter(f)} className={`cursor-pointer rounded-sm border px-4 py-1.5 text-xs font-bold capitalize ${filter === f ? "border-sage-900 bg-sage-900 text-white" : "border-line bg-white text-sage-800"}`}>
             {f}
           </button>
         ))}
@@ -51,19 +51,19 @@ export default function ManageAppointmentsPage() {
         <EmptyState title="No appointments" text="Nothing to show in this view." />
       ) : (
         <TableWrap>
-          <thead className="bg-blush-100">
+          <thead className="bg-paper-100">
             <tr>{["Customer", "Service", "Date & Time", "Price", "Status", "Payment", "Requested", "Actions"].map((h) => <th key={h} className="th">{h}</th>)}</tr>
           </thead>
           <tbody>
             {list.map((a) => (
               <tr key={a._id} className="border-t border-line">
                 <td className="td">
-                  <p className="font-bold text-plum-900">{a.customer?.name || "—"}</p>
+                  <p className="font-bold text-sage-900">{a.customer?.name || "—"}</p>
                   <p className="text-xs text-muted">{a.customer?.email}</p>
                 </td>
                 <td className="td">
                   <div className="flex items-center gap-3">
-                    <SmartImage src={a.service?.image} alt="" className="h-10 w-10 shrink-0 rounded-lg" />
+                    <SmartImage src={a.service?.image} alt="" className="h-10 w-10 shrink-0 rounded-sm" />
                     <span className="font-semibold">{a.service?.serviceName || "Deleted service"}</span>
                   </div>
                 </td>

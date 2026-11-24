@@ -17,14 +17,14 @@ export default function TransactionsPage() {
         <EmptyState title="No transactions yet" text="Paid appointments will show up here." />
       ) : (
         <TableWrap>
-          <thead className="bg-blush-100">
+          <thead className="bg-paper-100">
             <tr>{["Customer", "Service", "Appointment", "Amount", "Currency", "Stripe Session", "Status", "Date"].map((h) => <th key={h} className="th">{h}</th>)}</tr>
           </thead>
           <tbody>
             {data.map((t) => (
               <tr key={t._id} className="border-t border-line">
                 <td className="td">
-                  <p className="font-bold text-plum-900">{t.customer?.name || "—"}</p>
+                  <p className="font-bold text-sage-900">{t.customer?.name || "—"}</p>
                   <p className="text-xs text-muted">{t.customer?.email}</p>
                 </td>
                 <td className="td font-semibold">{t.service?.serviceName || "Deleted service"}</td>

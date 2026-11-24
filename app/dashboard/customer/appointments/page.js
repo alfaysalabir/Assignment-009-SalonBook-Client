@@ -56,9 +56,9 @@ export default function MyAppointmentsPage() {
     <>
       <PageTitle title="My Appointments" text="Track your requests, pay for confirmed visits and see your history." />
 
-      <div className="mb-5 inline-flex rounded-full bg-white p-1 text-sm font-bold ring-1 ring-line">
+      <div className="mb-5 inline-flex rounded-sm bg-white p-1 text-sm font-bold ring-1 ring-line">
         {[["appointments", "Appointments"], ["payments", "Payment History"]].map(([key, label]) => (
-          <button key={key} onClick={() => setTab(key)} className={`cursor-pointer rounded-full px-5 py-2 transition ${tab === key ? "bg-plum-900 text-white" : "text-plum-800"}`}>
+          <button key={key} onClick={() => setTab(key)} className={`cursor-pointer rounded-sm px-5 py-2 transition ${tab === key ? "bg-sage-900 text-white" : "text-sage-800"}`}>
             {label}
           </button>
         ))}
@@ -68,7 +68,7 @@ export default function MyAppointmentsPage() {
         <>
           <div className="mb-4 flex flex-wrap gap-2">
             {FILTERS.map((f) => (
-              <button key={f} onClick={() => setFilter(f)} className={`cursor-pointer rounded-full border px-4 py-1.5 text-xs font-bold capitalize ${filter === f ? "border-plum-900 bg-plum-900 text-white" : "border-line bg-white text-plum-800"}`}>
+              <button key={f} onClick={() => setFilter(f)} className={`cursor-pointer rounded-sm border px-4 py-1.5 text-xs font-bold capitalize ${filter === f ? "border-sage-900 bg-sage-900 text-white" : "border-line bg-white text-sage-800"}`}>
                 {f}
               </button>
             ))}
@@ -78,7 +78,7 @@ export default function MyAppointmentsPage() {
             <EmptyState title="Nothing here" text="You have no appointments in this view." action={<Link href="/services" className="btn-dark btn-sm">Browse Services</Link>} />
           ) : (
             <TableWrap>
-              <thead className="bg-blush-100">
+              <thead className="bg-paper-100">
                 <tr>
                   {["Service", "Date & Time", "Price", "Status", "Payment", "Requested", "Actions"].map((h) => <th key={h} className="th">{h}</th>)}
                 </tr>
@@ -88,9 +88,9 @@ export default function MyAppointmentsPage() {
                   <tr key={a._id} className="border-t border-line">
                     <td className="td">
                       <div className="flex items-center gap-3">
-                        <SmartImage src={a.service?.image} alt="" className="h-12 w-12 shrink-0 rounded-xl" />
+                        <SmartImage src={a.service?.image} alt="" className="h-12 w-12 shrink-0 rounded-sm" />
                         <div>
-                          <p className="font-bold text-plum-900">{a.service?.serviceName || "Deleted service"}</p>
+                          <p className="font-bold text-sage-900">{a.service?.serviceName || "Deleted service"}</p>
                           <p className="text-xs text-muted">{a.service?.category}</p>
                         </div>
                       </div>
@@ -127,13 +127,13 @@ export default function MyAppointmentsPage() {
         <EmptyState title="No payments yet" text="Your payments will appear here after you pay for a confirmed appointment." />
       ) : (
         <TableWrap>
-          <thead className="bg-blush-100">
+          <thead className="bg-paper-100">
             <tr>{["Service", "Amount", "Reference", "Status", "Date"].map((h) => <th key={h} className="th">{h}</th>)}</tr>
           </thead>
           <tbody>
             {payments.data.map((t) => (
               <tr key={t._id} className="border-t border-line">
-                <td className="td font-bold text-plum-900">{t.service?.serviceName || "Deleted service"}</td>
+                <td className="td font-bold text-sage-900">{t.service?.serviceName || "Deleted service"}</td>
                 <td className="td font-semibold">{formatPrice(t.amount)} <span className="uppercase text-muted">{t.currency}</span></td>
                 <td className="td font-mono text-xs text-muted">{shortId(t.stripeSessionId)}</td>
                 <td className="td"><StatusBadge status={t.status} /></td>

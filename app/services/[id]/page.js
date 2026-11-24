@@ -31,23 +31,23 @@ export default function ServiceDetailsPage({ params }) {
 
   return (
     <div className="container-page py-10">
-      <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-plum-800 hover:text-gold-600">
+      <Link href="/services" className="mb-6 inline-flex items-center gap-2 text-sm font-semibold text-sage-800 hover:text-clay-600">
         <FiArrowLeft /> Back to Services
       </Link>
 
       <div className="grid gap-10 lg:grid-cols-2">
-        <div className="overflow-hidden rounded-[2rem]">
+        <div className="overflow-hidden rounded-sm">
           <SmartImage src={service.image} alt={service.serviceName} className="h-[360px] w-full sm:h-[480px]" />
         </div>
 
         <div>
-          <span className="inline-flex items-center gap-1.5 rounded-full bg-blush-100 px-3 py-1 text-xs font-bold text-plum-800">
+          <span className="inline-flex items-center gap-1.5 rounded-sm bg-paper-100 px-3 py-1 text-xs font-bold text-sage-800">
             <FiTag size={12} /> {service.category}
           </span>
-          <h1 className="mt-3 text-5xl font-bold leading-tight text-plum-900">{service.serviceName}</h1>
+          <h1 className="mt-3 text-5xl font-bold leading-tight text-sage-900">{service.serviceName}</h1>
 
           <div className="mt-5 flex flex-wrap items-center gap-6">
-            <span className="font-display text-5xl font-bold text-gold-600">{formatPrice(service.price)}</span>
+            <span className="font-display text-5xl font-bold text-clay-600">{formatPrice(service.price)}</span>
             <span className="flex items-center gap-2 text-muted"><FiClock /> {service.duration} minutes</span>
             {service.status !== "active" && <StatusBadge status="inactive" />}
           </div>
@@ -55,12 +55,12 @@ export default function ServiceDetailsPage({ params }) {
           <p className="mt-6 leading-relaxed text-muted">{service.description}</p>
 
           {isAdmin && (
-            <p className="mt-6 flex items-start gap-2 rounded-2xl bg-amber-50 p-4 text-sm text-amber-800">
+            <p className="mt-6 flex items-start gap-2 rounded-sm bg-amber-50 p-4 text-sm text-amber-800">
               <FiInfo className="mt-0.5 shrink-0" /> Admins can&apos;t submit appointment requests. Use a customer account to book.
             </p>
           )}
           {service.status !== "active" && (
-            <p className="mt-6 flex items-start gap-2 rounded-2xl bg-slate-100 p-4 text-sm text-slate-700">
+            <p className="mt-6 flex items-start gap-2 rounded-sm bg-slate-100 p-4 text-sm text-slate-700">
               <FiInfo className="mt-0.5 shrink-0" /> This service is inactive and cannot be booked.
             </p>
           )}

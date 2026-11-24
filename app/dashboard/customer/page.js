@@ -28,8 +28,8 @@ export default function CustomerOverview() {
       </div>
 
       <div className="mt-8 flex items-center justify-between">
-        <h2 className="text-3xl font-bold text-plum-900">Recent appointments</h2>
-        <Link href="/dashboard/customer/appointments" className="flex items-center gap-1 text-sm font-bold text-plum-800 hover:text-gold-600">View all <FiArrowRight /></Link>
+        <h2 className="text-3xl font-bold text-sage-900">Recent appointments</h2>
+        <Link href="/dashboard/customer/appointments" className="flex items-center gap-1 text-sm font-bold text-sage-800 hover:text-clay-600">View all <FiArrowRight /></Link>
       </div>
       <div className="mt-4 space-y-3">
         {recent.length === 0 ? (
@@ -37,9 +37,9 @@ export default function CustomerOverview() {
         ) : (
           recent.map((a) => (
             <div key={a._id} className="card flex flex-wrap items-center gap-4 p-4">
-              <SmartImage src={a.service?.image} alt="" className="h-14 w-14 rounded-xl" />
+              <SmartImage src={a.service?.image} alt="" className="h-14 w-14 rounded-sm" />
               <div className="min-w-0 flex-1">
-                <p className="truncate font-bold text-plum-900">{a.service?.serviceName || "Deleted service"}</p>
+                <p className="truncate font-bold text-sage-900">{a.service?.serviceName || "Deleted service"}</p>
                 <p className="text-xs text-muted">{formatDay(a.appointmentDate)} · {a.timeSlot} · {formatPrice(a.servicePrice)}</p>
               </div>
               <StatusBadge status={a.status} />

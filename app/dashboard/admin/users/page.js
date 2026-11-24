@@ -11,9 +11,9 @@ import { formatDate } from "@/lib/utils";
 function Avatar({ user, size = "h-10 w-10" }) {
   return user.image ? (
     // eslint-disable-next-line @next/next/no-img-element
-    <img src={user.image} alt="" className={`${size} shrink-0 rounded-full object-cover`} />
+    <img src={user.image} alt="" className={`${size} shrink-0 rounded-sm object-cover`} />
   ) : (
-    <span className={`${size} grid shrink-0 place-items-center rounded-full bg-plum-900 font-bold text-white`}>{user.name?.[0]?.toUpperCase()}</span>
+    <span className={`${size} grid shrink-0 place-items-center rounded-sm bg-sage-900 font-bold text-white`}>{user.name?.[0]?.toUpperCase()}</span>
   );
 }
 
@@ -63,7 +63,7 @@ export default function ManageUsersPage() {
         <EmptyState title="No customers found" text="Registered customers will appear here." />
       ) : (
         <TableWrap>
-          <thead className="bg-blush-100">
+          <thead className="bg-paper-100">
             <tr>{["Customer", "Phone", "Joined", "Status", "Actions"].map((h) => <th key={h} className="th">{h}</th>)}</tr>
           </thead>
           <tbody>
@@ -73,7 +73,7 @@ export default function ManageUsersPage() {
                   <div className="flex items-center gap-3">
                     <Avatar user={u} />
                     <div>
-                      <p className="font-bold text-plum-900">{u.name}</p>
+                      <p className="font-bold text-sage-900">{u.name}</p>
                       <p className="text-xs text-muted">{u.email}</p>
                     </div>
                   </div>
@@ -99,7 +99,7 @@ export default function ManageUsersPage() {
 
       <Modal open={!!detailsId} onClose={() => setDetailsId(null)} title="User details">
         {details.loading ? (
-          <div className="grid place-items-center py-8 text-plum-700"><Spinner className="h-8 w-8" /></div>
+          <div className="grid place-items-center py-8 text-sage-700"><Spinner className="h-8 w-8" /></div>
         ) : details.error ? (
           <p className="text-sm text-rose-600">{details.error}</p>
         ) : details.data ? (
@@ -107,7 +107,7 @@ export default function ManageUsersPage() {
             <div className="mb-4 flex items-center gap-4">
               <Avatar user={details.data} size="h-16 w-16" />
               <div>
-                <p className="text-xl font-bold text-plum-900">{details.data.name}</p>
+                <p className="text-xl font-bold text-sage-900">{details.data.name}</p>
                 <p className="text-sm text-muted">{details.data.email}</p>
               </div>
             </div>
@@ -118,7 +118,7 @@ export default function ManageUsersPage() {
               ["Account", details.data.isBlocked ? "Blocked" : "Active"],
             ].map(([k, v]) => (
               <div key={k} className="flex justify-between border-b border-line py-2.5 text-sm last:border-0">
-                <span className="text-muted">{k}</span><span className="font-semibold text-plum-900">{v}</span>
+                <span className="text-muted">{k}</span><span className="font-semibold text-sage-900">{v}</span>
               </div>
             ))}
           </div>

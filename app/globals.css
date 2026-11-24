@@ -4,28 +4,31 @@
 @source "../lib";
 
 @theme {
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Fraunces", Georgia, serif;
 
-  --color-ink: #1f1417;
-  --color-muted: #7a6a6e;
-  --color-line: #eadfd9;
+  --color-ink: #1c1f1a;
+  --color-muted: #6f7468;
+  --color-line: #d9d2c3;
 
-  --color-plum-950: #25111b;
-  --color-plum-900: #3a1d2b;
-  --color-plum-800: #4e2a3c;
-  --color-plum-700: #693b52;
-  --color-plum-600: #85506a;
+  /* deep sage greens (the "dark" colour of the site) */
+  --color-sage-950: #131c17;
+  --color-sage-900: #1f2d26;
+  --color-sage-800: #2c3f35;
+  --color-sage-700: #3d5648;
+  --color-sage-600: #587566;
 
-  --color-gold-300: #e6cfa3;
-  --color-gold-400: #d6b77f;
-  --color-gold-500: #c19a5b;
-  --color-gold-600: #a37e41;
+  /* terracotta accent */
+  --color-clay-300: #e8a58a;
+  --color-clay-400: #d57a58;
+  --color-clay-500: #c4623f;
+  --color-clay-600: #a84e2f;
 
-  --color-blush-50: #fdf8f5;
-  --color-blush-100: #f8ede8;
-  --color-blush-200: #f0d9d1;
-  --color-blush-300: #e4bfb3;
+  /* warm paper backgrounds */
+  --color-paper-50: #f7f3ea;
+  --color-paper-100: #efe9db;
+  --color-paper-200: #e2dac7;
+  --color-paper-300: #cfc5ad;
 }
 
 html {
@@ -33,7 +36,7 @@ html {
 }
 
 body {
-  background: var(--color-blush-50);
+  background: var(--color-paper-50);
   color: var(--color-ink);
   font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
@@ -43,7 +46,8 @@ h1,
 h2,
 h3 {
   font-family: var(--font-display);
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  font-weight: 500 !important;
 }
 
 @layer components {
@@ -51,77 +55,75 @@ h3 {
     @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
   }
 
-  /* Buttons (pill shaped, like the reference style) */
+  /* Buttons: square, uppercase, small tracking */
   .btn,
   .btn-dark,
   .btn-gold,
   .btn-outline,
   .btn-danger,
   .btn-ghost-light {
-    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-sm px-6 py-3.5 text-xs font-bold uppercase tracking-[0.14em] transition duration-200 disabled:cursor-not-allowed disabled:opacity-60;
   }
   .btn-dark {
-    @apply bg-plum-900 text-white hover:bg-plum-700;
+    @apply bg-sage-900 text-paper-50 hover:bg-clay-500;
   }
   .btn-gold {
-    @apply bg-gold-400 text-plum-950 hover:bg-gold-300;
+    @apply bg-clay-500 text-white hover:bg-sage-900;
   }
   .btn-outline {
-    @apply border border-plum-900/20 bg-white text-plum-900 hover:border-plum-900 hover:bg-blush-100;
+    @apply border border-sage-900 bg-transparent text-sage-900 hover:bg-sage-900 hover:text-paper-50;
   }
   .btn-ghost-light {
-    @apply border border-white/30 text-white hover:bg-white/10;
+    @apply border border-white/40 text-white hover:bg-white/10;
   }
   .btn-danger {
-    @apply bg-rose-600 text-white hover:bg-rose-700;
+    @apply bg-rose-700 text-white hover:bg-rose-800;
   }
   /* keep .btn-sm AFTER the variants so its smaller padding wins */
   .btn-sm {
-    @apply px-4 py-2 text-xs;
+    @apply px-4 py-2.5 text-[11px];
   }
 
   /* Forms */
   .label {
-    @apply mb-1.5 block text-sm font-semibold text-plum-900;
+    @apply mb-1.5 block text-xs font-bold uppercase tracking-[0.12em] text-sage-800;
   }
   .input {
-    @apply w-full rounded-xl border border-line bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-plum-700 focus:ring-4 focus:ring-plum-700/10;
+    @apply w-full rounded-sm border border-paper-300 bg-white px-4 py-3 text-sm text-ink outline-none transition placeholder:text-muted/70 focus:border-sage-900 focus:ring-2 focus:ring-sage-900/10;
   }
 
-  /* Small label with dashes, e.g. "— Our Services —" */
+  /* Small label with a square marker, e.g. "■ Our Services" */
   .eyebrow {
-    @apply inline-flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-gold-600;
+    @apply inline-flex items-center gap-2.5 text-[11px] font-bold uppercase tracking-[0.22em] text-clay-600;
   }
-  .eyebrow::before,
-  .eyebrow::after {
+  .eyebrow::before {
     content: "";
-    @apply h-px w-8 bg-gold-500/60;
+    @apply h-2 w-2 bg-clay-500;
   }
-  .eyebrow-left::before {
-    display: none;
+  .eyebrow-left {
   }
 
   .card {
-    @apply rounded-2xl border border-line bg-white;
+    @apply rounded-sm border border-line bg-white;
   }
   .th {
-    @apply whitespace-nowrap px-4 py-3 text-xs font-bold uppercase tracking-wide text-muted;
+    @apply whitespace-nowrap px-4 py-3 text-[11px] font-bold uppercase tracking-[0.14em] text-muted;
   }
   .td {
     @apply px-4 py-3 align-middle;
   }
 }
 
-/* Big outlined text that slides across the footer */
+/* Sliding strips */
+.ticker {
+  display: flex;
+  width: max-content;
+  animation: slide 45s linear infinite;
+}
 .marquee {
   display: flex;
   width: max-content;
-  animation: slide 40s linear infinite;
-}
-.marquee span {
-  -webkit-text-stroke: 1px rgba(214, 183, 127, 0.55);
-  color: transparent;
-  white-space: nowrap;
+  animation: slide 50s linear infinite;
 }
 @keyframes slide {
   to {
@@ -144,6 +146,7 @@ h3 {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .ticker,
   .marquee,
   .fade-up {
     animation: none;
